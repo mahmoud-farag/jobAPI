@@ -1,0 +1,161 @@
+///register route algorithm///////
+1. setup the route user route. DONE
+2. setup the user controller. DONE
+3. configure the user route into the app main module. DONE
+4. create the user model {name, email, password}. DONE
+5. check if the user provide the write data or not. DONE
+6. bcrypt (useing the bcryptjs module) the password using the mongoose pre function.  DONE
+7. save the user instance into db. DONE
+8. generate the token (useing JWT module) by passing the {_id, name} as a body to the sign function
+    by create a custom function into the userSchema.
+9. send back the {user.name, token to the client }.
+
+
+/// login route algorithm //////
+1. setup the route user. DONE
+2. setup the user controller. DONE
+3. configure the user route into the app main module. DONE
+4. check if the user provide the write credentials or not . DONE
+     - if correct then
+                   fetch the document from the db
+     - if not correct then
+                   fire bad-request error msg to the user.   
+5. check the user provide the correct password or not by useing schema methods. DONE
+     - if correct then 
+                 continue your logic
+     - if not correct then
+                 fire bad-request error msg to the user.
+                
+
+//// authinticated meddileware algorithm//////
+
+1. check if the token exist with appropriate syntax or not on the headers object.
+    - if exist then 
+                    extract the token and decode the user and inject it back to the  same route (req.user).
+    - if not exist then
+                    fire unauthorized error {wrong credentials} to the user
+2. now make your logic for this route.   
+
+
+///// getAllJobs route algorithm/////
+1. destructure the user property from the req.
+2. check if userID exist or not 
+        - if exist  
+            then fetch all documents that belongs to this user  
+            and send it back to the client with status cod 200.
+
+        - if not exist
+            then fire unauthrized user.
+
+
+//// create new job route algorithm /////
+1. destructure the user property from the req object && also the job from the body property.
+2. check if the client provide new job
+      - if new job exist 
+           then create new record on the DB.
+      - if new job not exist 
+           then fire bad request error.
+3. be ready for any unwanted bug or internal server error.
+4. if created successfully then fire ok and return back the created job.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/// ---------NOTES--------------------////////////
+1. [object object] error will be solved using --> Object.keys().
+2. to convert opbejct properties to be an array you may using ---> Object.values(object)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
