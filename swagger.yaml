@@ -1,0 +1,191 @@
+openapi: 3.0.0
+info:
+  title: JOBAPI
+  contact: {}
+  version: '1.0'
+servers:
+- url: https://job1api.herokuapp.com/api/v1
+  variables: {}
+paths:
+  /jobs:
+    get:
+      tags:
+      - jobs
+      summary: Get_AllJobs_Route
+      operationId: Get_AllJobs_Route
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    post:
+      tags:
+      - jobs
+      summary: Post_job_Route
+      operationId: Post_job_Route
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          text/plain:
+            schema:
+              type: object
+              example: {}
+            example: {}
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /jobs/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The job ID
+    get:
+      tags:
+      - jobs
+      summary: Get_Job_Route
+      operationId: Get_Job_Route
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    patch:
+      tags:
+      - jobs
+      summary: Update_Jobe_Route
+      operationId: Update_Jobe_Route
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Update_Jobe_Route_Request'
+            example:
+              company: apollo
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    delete:
+      tags:
+      - jobs
+      summary: Delete_Jobe_Route
+      operationId: Delete_Jobe_Route
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /user/register:
+    post:
+      tags:
+      - auth
+      summary: Register_Route
+      operationId: Register_Route
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Register_Route_Request'
+            example:
+              name: hend
+              email: hend2@example.com
+              password: '1234567'
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /user/login:
+    post:
+      tags:
+      - auth
+      summary: '{{URL1}}/auth/login'
+      operationId: '{{URL1}}/auth/login'
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/URL1authloginRequest'
+            example:
+              email: ali@example.com
+              password: '1234567'
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+components:
+  schemas:
+    Update_Jobe_Route_Request:
+      title: Update_Jobe_Route_Request
+      required:
+      - company
+      type: object
+      properties:
+        company:
+          type: string
+      example:
+        company: apollo
+    Register_Route_Request:
+      title: Register_Route_Request
+      required:
+      - name
+      - email
+      - password
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        name: hend
+        email: hend2@example.com
+        password: '1234567'
+    URL1authloginRequest:
+      title: URL1authloginRequest
+      required:
+      - email
+      - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        email: ali@example.com
+        password: '1234567'
+  securitySchemes:
+    httpBearer:
+      type: http
+      scheme: bearer
+security:
+- httpBearer: []
+tags:
+- name: jobs
+- name: auth
