@@ -15,6 +15,14 @@ import cors from 'cors';
 import  xss from 'xss-clean';
 import  rateLimit from 'express-rate-limit';
 
+
+// sawgger docs 
+
+import swaggerUI from 'swagger-ui-express';
+import YAML from 'yamljs';
+
+const swaggerDocument = YAML.load('./swagger.yaml');
+
 const app = express();
 dotenv.config();
 
@@ -34,8 +42,10 @@ app.use(xss());
 
 app.get('/', (req,res)=>{
 
-    res.status(200).send('Helloooooooooooooo, your API  is ready for the Fire Works online ')
+    res.status(200).send('<h1>Hello, your API is ready for the Fire Works online</h1> <a href="/api-docs">DOCUMENTATION</a> ')
 })
+
+app.use('/api-docs',swaggerUI.serve,swaggerUI.setup((swaggerDocument)));
 app.use(express.static('./public'));
 app.use(express.json());
 
