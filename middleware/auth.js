@@ -4,13 +4,13 @@ import  jwt from 'jsonwebtoken';
 
 const checkAuthintection = (req,res,next)=>{
 
-const authenticationHeader = req.headers.authentication;
+const AuthorizationHeader = req.headers.Authorization;
 
-  if(!authenticationHeader || !authenticationHeader.startsWith('Bearer ')){
+  if(!AuthorizationHeader || !AuthorizationHeader.startsWith('Bearer ')){
       throw new UnauthenticatedError('plz register or login to be able to access this data');
   }
 
-  const [,token] = authenticationHeader.split(' ');
+  const [,token] = AuthorizationHeader.split(' ');
     try{
        const user = jwt.verify(token, process.env.JWT_SECRET);
        req.user={userID:user.userId, name:user.name};
