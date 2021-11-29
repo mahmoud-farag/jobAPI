@@ -4,8 +4,8 @@ import  jwt from 'jsonwebtoken';
 
 const checkAuthintection = (req,res,next)=>{
 
-const AuthorizationHeader = req.headers.Authorization;
-
+const AuthorizationHeader = req.headers.authorization;
+    //    console.log(req.headers)
   if(!AuthorizationHeader || !AuthorizationHeader.startsWith('Bearer ')){
       throw new UnauthenticatedError('plz register or login to be able to access this data');
   }

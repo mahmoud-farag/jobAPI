@@ -37,12 +37,15 @@ const postNewJob = async (req, res)=>{
 
 // /api/v1/jobs/:id  route controller
 const getJob = async (req, res)=>{
-                
+         
+          console.log(req.user)
+          console.log(req.params.id)
     try{
-      const job= await Job.find({userID:req.params.id, createdBy: req.user.userID});
+      const job= await Job.find({_id:req.params.id, createdBy: req.user.userID});
       if(!job){
         throw new Error(`no jobs found  for this user: ${req.user.name}`)
     }  
+    console.log(job)
       res.status(StatusCodes.OK).send(job);
     }catch(error){
         res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(error.message)
@@ -58,7 +61,7 @@ const updateJob= async (req, res)=>{
          const {company, postion} = req.body;
       try{
          const updatedJob = await Job.findOneAndUpdate(
-                            {userID:req.params.id, createdBy:req.user.userID},
+                            {_id:req.params.id, createdBy:req.user.userID},
                             {company, postion},
                             { new: true, runValidators: true })
             if(!updatedJob){
@@ -76,7 +79,7 @@ const updateJob= async (req, res)=>{
 
 const deleteJob = async(req, res)=>{
       try {
-            const deletedJob =  await Job.findByIdAndRemove({userID:req.params.id, createdBy:req.user.userID});
+            const deletedJob =  await Job.findByIdAndRemove({_id:req.params.id, createdBy:req.user.userID});
             if(!deletedJob){
                 throw new Error(`no jobs found to be delete for this user: ${req.user.name}`)
             }   
